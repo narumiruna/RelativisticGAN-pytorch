@@ -8,7 +8,7 @@ def get_dataloader(root='data', batch_size=64, num_workers=0, size=64):
          transforms.ToTensor()])
 
     dataloader = data.DataLoader(
-        datasets.MNIST(root, train=True, transform=transform),
+        datasets.MNIST(root, train=True, transform=transform, download=True),
         batch_size=batch_size,
         shuffle=True,
         num_workers=num_workers)

@@ -7,7 +7,7 @@ class Generator(nn.Module):
         super(Generator, self).__init__()
 
         self.conv = nn.Sequential(
-            nn.ConvTranspose2d(100, ch * 8, 4, 1, 0, 0, bias=False),
+            nn.ConvTranspose2d(128, ch * 8, 4, 1, 0, 0, bias=False),
             nn.BatchNorm2d(ch * 8),
             nn.ReLU(inplace=True),
             nn.ConvTranspose2d(ch * 8, ch * 4, 5, 2, 2, 1, bias=False),
@@ -23,7 +23,7 @@ class Generator(nn.Module):
             nn.Tanh())
 
     def forward(self, input_):
-        return self.conv(input_.view(input_.size(0), 100, 1, 1))
+        return self.conv(input_.view(input_.size(0), 128, 1, 1))
 
 
 class Discriminator(nn.Module):
