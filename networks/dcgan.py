@@ -22,8 +22,8 @@ class Generator(nn.Module):
             nn.ConvTranspose2d(ch, 1, 5, 2, 2, 1, bias=False),
             nn.Tanh())
 
-    def forward(self, input_):
-        return self.conv(input_.view(input_.size(0), 128, 1, 1))
+    def forward(self, x):
+        return self.conv(x.view(x.size(0), 128, 1, 1))
 
 
 class Discriminator(nn.Module):
@@ -46,5 +46,5 @@ class Discriminator(nn.Module):
             nn.Conv2d(ch * 8, 1, 4, 1, 0, bias=False),
         )
 
-    def forward(self, input_):
-        return self.conv(input_).view(input_.size(0))
+    def forward(self, x):
+        return self.conv(x).view(x.size(0))
