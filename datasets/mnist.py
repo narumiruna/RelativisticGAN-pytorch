@@ -2,7 +2,7 @@ from torch.utils import data
 from torchvision import datasets, transforms
 
 
-def get_dataloader(root='data', batch_size=64, num_workers=0, size=64):
+def get_mnist_dataloader(root='data', batch_size=64, num_workers=0, size=64):
     transform = transforms.Compose(
         [transforms.Resize(size),
          transforms.ToTensor()])
