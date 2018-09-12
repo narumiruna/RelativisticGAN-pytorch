@@ -4,7 +4,7 @@ import os
 import torch
 from torch import optim
 
-from datasets import get_mnist_dataloader
+from datasets import get_cat_dataloader
 from networks import Discriminator, Generator
 from trainers import Trainer
 
@@ -22,15 +22,15 @@ def main():
 
     device = torch.device('cuda' if args.cuda else 'cpu')
 
-    net_g = Generator().to(device)
-    net_d = Discriminator().to(device)
+    net_g = Generator(ch=128).to(device)
+    net_d = Discriminator(ch=128).to(device)
 
     optim_g = optim.Adam(
         net_g.parameters(), lr=args.learning_rate, betas=(0.5, 0.999))
     optim_d = optim.Adam(
         net_d.parameters(), lr=args.learning_rate, betas=(0.5, 0.999))
 
-    dataloader = get_mnist_dataloader()
+    dataloader = get_cat_dataloader()
 
     trainer = Trainer(net_g, net_d, optim_g, optim_d, dataloader, device,
                       args.num_d_iterations)

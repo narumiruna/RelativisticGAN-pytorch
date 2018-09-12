@@ -28,7 +28,7 @@ class Trainer(object):
         self.loss_d.reset()
         self.loss_g.reset()
 
-        for i, (x, _) in enumerate(self.dataloader):
+        for i, x in enumerate(self.dataloader):
             x = x.to(self.device)
             z = torch.randn(x.size(0), 128, dtype=torch.float).to(self.device)
             if (i + 1) % (self.num_d_iterations + 1) == 0:
@@ -64,6 +64,11 @@ class Trainer(object):
 
             f = 'samples/{:2d}.jpg'.format(epoch)
             self.plot_sample(f)
+
+            torch.save(self.net_d.state_dict(),
+                       'models/net_d_{}.pt'.format(epoch))
+            torch.save(self.net_g.state_dict(),
+                       'models/net_g_{}.pt'.format(epoch))
 
     def plot_sample(self, f):
         z = torch.randn(64, 128, dtype=torch.float).to(self.device)

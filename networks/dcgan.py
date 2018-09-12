@@ -19,7 +19,7 @@ class Generator(nn.Module):
             nn.ConvTranspose2d(ch * 2, ch, 5, 2, 2, 1, bias=False),
             nn.BatchNorm2d(ch),
             nn.ReLU(inplace=True),
-            nn.ConvTranspose2d(ch, 1, 5, 2, 2, 1, bias=False),
+            nn.ConvTranspose2d(ch, 3, 5, 2, 2, 1, bias=False),
             nn.Tanh())
 
     def forward(self, x):
@@ -32,7 +32,7 @@ class Discriminator(nn.Module):
         super(Discriminator, self).__init__()
 
         self.conv = nn.Sequential(
-            nn.Conv2d(1, ch, 4, 2, 1, bias=False),
+            nn.Conv2d(3, ch, 4, 2, 1, bias=False),
             nn.LeakyReLU(0.2, inplace=True),
             nn.Conv2d(ch, ch * 2, 4, 2, 1, bias=False),
             nn.BatchNorm2d(ch * 2),
